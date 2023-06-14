@@ -1,24 +1,71 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    <title>Star Wars | List</title>
+  <title>Star Wars Characters</title>
+  <style>
+    .character {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="character-list">
+  <div id="character-list"></div>
 
-    </div>
+  <script>
+    const characterListElement = document.getElementById('character-list');
 
-    <script src="./assets/scripts/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    function getStarWarsCharacters() {
+      const url = 'https://swapi.dev/api/people/';
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const characters = data.results;
+          displayCharacters(characters);
+        })
+        .catch(error => {
+          console.log('Erro ao obter dados dos personagens', error);
+        });
+    }
+
+    function displayCharacters(characters) {
+      characters.forEach(character => {
+        const characterElement = document.createElement('div');
+        characterElement.classList.add('character');
+
+        const nameElement = document.createElement('h2');
+        nameElement.textContent = character.name;
+        characterElement.appendChild(nameElement);
+
+        const imageElement = document.createElement('img');
+        getStarWarsImage(character.url)
+          .then(imageUrl => {
+            imageElement.src = imageUrl;
+          })
+          .catch(error => {
+            console.log('Erro ao obter imagem do personagem', error);
+          });
+        characterElement.appendChild(imageElement);
+
+        const heightElement = document.createElement('p');
+        heightElement.textContent = `Altura: ${character.height}`;
+        characterElement.appendChild(heightElement);
+
+        characterListElement.appendChild(characterElement);
+      });
+    }
+
+    function getStarWarsImage(url) {
+      return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          return data.image;
+        });
+    }
+
+    getStarWarsCharacters();
+  </script>
 </body>
-
 </html>

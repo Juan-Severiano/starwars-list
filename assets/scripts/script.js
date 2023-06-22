@@ -24,16 +24,6 @@ const characterListElement = document.getElementById('character-list');
         nameElement.textContent = character.name;
         characterElement.appendChild(nameElement);
 
-        const imageElement = document.createElement('img');
-        getStarWarsImage(character.url)
-          .then(imageUrl => {
-            imageElement.src = imageUrl;
-          })
-          .catch(error => {
-            console.log('Erro ao obter imagem do personagem', error);
-          });
-        characterElement.appendChild(imageElement);
-
         const heightElement = document.createElement('p');
         heightElement.textContent = `Altura: ${character.height}`;
         characterElement.appendChild(heightElement);

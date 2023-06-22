@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
   <title>Star Wars List Characters</title>
   <style>
     .character {
@@ -11,7 +12,7 @@
   </style>
 </head>
 <body>
-  <div id="character-list"></div>
+  <div id="character-list container"></div>
 
   <script>
     const characterListElement = document.getElementById('character-list');
@@ -34,6 +35,7 @@
       characters.forEach(character => {
         const characterElement = document.createElement('div');
         characterElement.classList.add('character');
+        characterElement.classList.add('card');
 
         const nameElement = document.createElement('h2');
         nameElement.textContent = character.name;

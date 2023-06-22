@@ -5,17 +5,22 @@
     width: 100%;
     height: 100%;
     z-index: -2;
-    background-image: url("https://cdn.create.vista.com/api/media/small/189328220/stock-vector-perfect-starry-night-sky-background");
+    background-image: url("../img/bg-starwars.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     color: #fff;
 }
+.container{
+    background-color: transparent!important;
+    color: #fff!important;
+}
 body {
     color: #fff!important;
 }
 #character-list {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins',Arial, sans-serif;
+    flex-wrap: wrap;
 }
 
 #character-list p {
